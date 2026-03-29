@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kore Apps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --border: rgba(255,255,255,0.06);
+      --text: #e8e8ed;
+      --text-sub: #8888a0;
+      --accent: #6c5ce7;
+      --accent-glow: rgba(108,92,231,0.25);
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ambient background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 640px;
+      padding: 0 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 80px 0 48px;
+    }
+
+    .brand {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 30%, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      margin-top: 12px;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--text-sub);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── App Card ── */
+    .app-card {
+      margin-top: 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .app-card:hover {
+      border-color: rgba(108,92,231,0.3);
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .app-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      /* placeholder gradient — replace src with actual icon */
+      background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      overflow: hidden;
+    }
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .app-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .app-name {
+      font-weight: 700;
+      font-size: 1.15rem;
+      line-height: 1.4;
+    }
+    .app-desc {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .store-badge {
+      display: inline-block;
+      margin-top: 16px;
+    }
+    .store-badge img {
+      height: 40px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: auto;
+      padding: 64px 0 32px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      header { padding: 56px 0 32px; }
+      .brand { font-size: 1.6rem; }
+      .app-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+        gap: 16px;
+      }
+      .app-icon { width: 80px; height: 80px; }
+    }
+
+    /* ── Fade-in ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    header     { animation: fadeUp 0.6s ease-out both; }
+    .app-card  { animation: fadeUp 0.6s ease-out 0.15s both; }
+    footer     { animation: fadeUp 0.6s ease-out 0.3s both; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">Kore Apps</div>
+      <p class="tagline">思考をデザインするアプリを作っています</p>
+    </header>
+
+    <a href="https://apps.apple.com/jp/app/%E6%80%9D%E8%80%83%E3%81%AE%E3%82%AF%E3%82%BB%E8%A8%BA%E6%96%AD/id6760533178" class="app-card" style="text-decoration:none;color:inherit;" target="_blank" rel="noopener">
+      <div class="app-icon">🧠</div>
+      <div class="app-info">
+        <div class="app-name">思考のクセ診断</div>
+        <p class="app-desc">あなたが陥りやすい認知バイアスTOP3を診断。約2分・10問で自分の思考パターンがわかります。</p>
+        <div class="store-badge">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83" alt="Download on the App Store">
+        </div>
+      </div>
+    </a>
+
+    <footer>
+      <div class="footer-links">
+        <a href="https://fluffy-tower-6db.notion.site/320a4b43fdbf805fa386f12b955e8552?pvs=74" target="_blank" rel="noopener">プライバシーポリシー</a>
+      </div>
+      <p class="copyright">&copy; 2025 Kore Apps</p>
+    </footer>
+  </div>
+
+</body>
+</html>
